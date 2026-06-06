@@ -1,0 +1,4 @@
+(executable
+ (name test_fanout)
+ (libraries market_fanout async core)
+ (preprocess (pps ppx_jane)))

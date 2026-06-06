@@ -10,11 +10,11 @@ let test_subscribe_unsubscribe () =
   Multiplexer.subscribe mux sub1;
   Multiplexer.subscribe mux sub2;
   assert (Multiplexer.subscriber_count mux = 2);
-  printf "printf "PASS: subscribe test\n";";
+  printf "PASS: subscribe test\n";
 
   Multiplexer.unsubscribe mux "Test-1";
   assert (Multiplexer.subscriber_count mux = 1);
-  printf "printf "PASS: unsubscribe test\n";";
+  printf "PASS: unsubscribe test\n";
   Deferred.unit
 
 let test_publish () =
@@ -31,7 +31,7 @@ let test_publish () =
   let%bind () = Multiplexer.publish mux Market_data.Heartbeat in
 
   assert (!received = 3);
-  printf "printf "PASS: publish test (%d messages received)\n" !received;" !received;
+  printf "PASS: publish test (%d messages received)\n" !received;
   Deferred.unit
 
 let test_fanout () =
@@ -52,16 +52,16 @@ let test_fanout () =
   in
 
   assert (!count = 5);
-  printf "printf "PASS: fanout test (%d subscribers got the message)\n" !count;" !count;
+  printf "PASS: fanout test (%d subscribers got the message)\n" !count;
   Deferred.unit
 
 let () =
   don't_wait_for (
-    printf "\n=== Running Tests ===\n\n";
+    
     let%bind () = test_subscribe_unsubscribe () in
     let%bind () = test_publish () in
     let%bind () = test_fanout () in
-    printf "printf "\nall tests ok\n";";
+    
     Shutdown.exit 0
   );
   never_returns (Scheduler.go ())
